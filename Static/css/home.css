@@ -1,0 +1,155 @@
+.snap {
+  margin-top: 4.2rem;
+  max-height: 45.5rem;
+  /* overflow-y: scroll;
+  scroll-snap-type: y mandatory; */
+}
+
+.home {
+  /* scroll-snap-align: center; */
+  padding: 3rem 4rem 1rem;
+  color: white;
+  min-height: 45.5rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.home h4 {
+  font-family: "Racing Sans One", cursive;
+  font-family: "Rye", cursive;
+  font-size: 5rem;
+  letter-spacing: 3px;
+  margin-top: 1.5rem;
+  line-height: 1.4;
+  background: -webkit-linear-gradient(greenyellow, aqua);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home p {
+  font-size: 1.6rem;
+  font-family: var(--paragraph-font);
+  font-style: italic;
+  letter-spacing: 2px;
+  margin-top: 0.8rem;
+  line-height: 1.5;
+}
+
+#btn {
+  margin-top: 3rem;
+  padding: 1em 2em;
+  border-radius: 10rem;
+  font-size: 1.1rem;
+  font-family: system-ui;
+  background-image: linear-gradient(60deg, aqua, greenyellow);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#btn:hover,
+#btn:focus {
+  transform: scale(1.05);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 55%;
+  z-index: -1;
+  background-image: url(../Images/arena-g386c8f4ee_1920.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 110%;
+  background-position: 5rem top;
+  overflow: hidden;
+}
+
+.image::before {
+  content: "";
+  position: absolute;
+  inset: -5rem auto auto -8rem;
+  height: 200%;
+  width: 30%;
+  background-color: var(--main-bgcolor);
+  transform: rotate(15deg);
+  z-index: 10;
+}
+
+.image::after {
+  content: "";
+  position: absolute;
+  inset: -5rem 0 auto auto;
+  height: 200%;
+  width: 100%;
+}
+
+.get-started {
+  /* scroll-snap-align: start; */
+  min-height: 45.5rem;
+  color: white;
+  padding: 2rem;
+}
+
+.get-started > h4 {
+  text-align: center;
+  font-size: 3rem;
+  font-family: var(--font-1);
+}
+
+.steps {
+  margin-top: 3rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.step-details {
+  display: flex;
+  gap: 10rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  background-color: var(--lighter-bgcolor);
+  transform: translateY(15rem);
+  opacity: 0;
+  transition: 0.3s ease;
+  min-height: 40rem;
+}
+
+.step-details:nth-child(2),
+.step-details:last-child {
+  flex-direction: row-reverse;
+}
+
+.show-step-details {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.step-details img {
+  max-height: 35rem;
+}
+
+.step-info {
+  max-width: 30rem;
+}
+
+.step-info h4 {
+  font-size: 3rem;
+  font-family: "Chonburi", cursive;
+  background: -webkit-linear-gradient(greenyellow, aqua, yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.step-info p {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  font-family: var(--paragraph-font);
+  letter-spacing: 1px;
+}

@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/questions.css') }}">
+{% endblock %}
+
+{% block title %}
+Insurance | Questions
+{% endblock %}
+
+{% block body %}
+<div class="questions">
+  <a href="{{ url_for('home') }}">
+    <div class="back">
+      <i class="fa fa-angle-double-left"></i>
+    </div>
+  </a>
+  {% if session %}
+  <p id="unique">Session ID -
+    <span>{{ session.session_id }}</span>
+  </p>
+  {% endif %}
+  {% if session.major_insurance %}
+  {% for insurance in major_insurances if insurance.id == session.major_insurance %}
+  <p id="uniques">{{ session.beneficiary }} - {{ insurance.name }}</p>
+  {% endfor %}
+  {% endif %}
+  <h4>Answer the following questions <br> to customize your cover</h4>
+  {% if session.major_insurance %}
+  {% else %}
+  <form id="form1" action="{{ url_for('select_major_insurance') }}" method="post">
+    <div class="input">
+      <label for="type">Select type of cover</label>
+      <select required name="type" id="type">
+        <option selected disabled value="">Choose your answer</option>
+        {% for major in major_insurances %}
+        <option value="{{ major.id }}">{{ major.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="input">
+      <label for="type">Select beneficiary of cover</label>
+      <select required name="beneficiary" id="type">
+        <option selected disabled value="">Choose your answer</option>
+        <option value="Personal">Personal</option>
+        <option value="Third-party">Third-party</option>
+      </select>
+    </div>
+    <button class="btn" type="submit">
+      <span class="button--text">NEXT</span>
+    </button>
+  </form>
+  {% endif %}
+  {% if session.major_insurance == 1 %}
+  <form method="post" action="{{ url_for('answers') }}">
+    {% for question in questions %}
+    <div class="input">
+      <label>{{ question[1]['question'] }}</label>
+      <select required name="answer">
+        <option selected disabled value="">Choose your answer</option>
+        {% for choices in question[1]['choices'] %}
+        <option value="{{ choices }}">{{ choices }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endfor %}
+    <button class="btn" type="submit">
+      <span class="button--text">SUBMIT</span>
+    </button>
+  </form>
+  {% elif session.major_insurance == 3 %}
+  <form method="post" action="{{ url_for('answers') }}">
+    {% for question in auto %}
+    <div class="input">
+      <label>{{ question[1]['question'] }}</label>
+      <select required name="answer">
+        <option selected disabled value="">Choose your answer</option>
+        {% for choices in question[1]['choices'] %}
+        <option value="{{ choices }}">{{ choices }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endfor %}
+  </form>
+  {% elif session.major_insurance == 2 %}
+  <form method="post" action="{{ url_for('answers') }}">
+    {% for question in health %}
+    <div class="input">
+      <label>{{ question[1]['question'] }}</label>
+      <select required name="answer">
+        <option selected disabled value="">Choose your answer</option>
+        {% for choices in question[1]['choices'] %}
+        <option value="{{ choices }}">{{ choices }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endfor %}
+    <button class="btn" type="submit">
+      <span class="button--text">SUBMIT</span>
+    </button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}
